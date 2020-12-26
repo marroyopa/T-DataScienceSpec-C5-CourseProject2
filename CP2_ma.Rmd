@@ -1,8 +1,10 @@
 ---
-title: "Health and economics consequences of storms and other severe weather events 1950-2011"
+title: Health and economics consequences of storms and other severe weather events 1950 - 2011
+
 author: "Marc Arroyo"
 date: "23/12/2020"
-output: html_document
+output:
+  html_document: default
 ---
 
 ## 0. Introduction
