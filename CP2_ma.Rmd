@@ -227,7 +227,7 @@ We can observe that, for example we have thunderstorm classified like "THUNDERST
 
 It's clear that we need to create a new field regrouping the different descriptions under one single category in order to know which type of events have the consequences described in original documentation. This categorization isn't provided by the National Weather Service, then we will create our own classification and store it in a factor type variable.
 
-Based on the information of the **World Meteorological Organization** and their report [Event Types of Hazards and Extreme Events](https://www.wmo.int/pages/prog/wcp/wcdmp/meeting/documents/Catalogue_Hazards_Extreme_Events_WMO_091117.pdf) we classified the 488 different events in our file. This classification will be loaded from a csv file contained in the repository.
+Based on the information of the **World Meteorological Organization** and their report [Event Types of Hazards and Extreme Events](https://www.wmo.int/pages/prog/wcp/wcdmp/meeting/documents/Catalogue_Hazards_Extreme_Events_WMO_091117.pdf) we classified the 488 different events in our file. This classification will be loaded from a csv file contained in the [github repository](https://github.com/marroyopa/T-DataScienceSpec-C5-CourseProject2/blob/main/EVTYPEClass.csv).
 
 ```{r, loadeventclass}
 
