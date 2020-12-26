@@ -1,0 +1,490 @@
+EVTYPE_Orig;EVTYPE_Class
+TORNADO;Tornado
+HAIL;Hail
+WINTER STORM;Storm
+THUNDERSTORM WINDS;Storm gale
+HURRICANE OPAL;Hurricane
+LIGHTNING;Storm
+DENSE FOG;Fog
+THUNDERSTORM WINS;Storm
+FLASH FLOOD;Flooding
+THUNDERSTORM WINDS LIGHTNING;Storm gale
+HEAT;Heat wave
+WIND;Gale
+LIGHTNING AND HEAVY RAIN;Storm
+COLD;Cold wave
+FLASH FLOODING/THUNDERSTORM WI;Flooding
+WATERSPOUT;Storm surge
+LIGHTNING/HEAVY RAIN;Heavy precipitation
+HIGH WIND;Gale
+RIVER FLOOD;Flooding
+AVALANCHE;Avalanche
+HIGH TIDES;Flooding
+HIGH WINDS/HEAVY RAIN;Heavy precipitation
+COASTAL FLOOD;Flooding
+RECORD RAINFALL;Heavy precipitation
+HEAVY SNOW/WIND;Snowstorm
+FLOOD;Flooding
+SLEET;Snowstorm
+ICE STORM;Snowstorm
+THUNDERSTORM WINDS/FUNNEL CLOU;Storm gale
+FLOODING/HEAVY RAIN;Flooding
+HIGH SURF;Storm surge
+HIGH;Storm
+WINTER STORMS;Storm
+RAINSTORM;Storm
+SEVERE THUNDERSTORMS;Storm
+THUNDERSTORMS WINDS;Storm gale
+FLOOD/RAIN/WINDS;Flooding
+FLASH FLOOD WINDS;Flooding
+FUNNEL CLOUD;Storm
+STRONG WIND;Gale
+FLASH FLOOD/;Flooding
+DRY MIRCOBURST WINDS;Gale
+URBAN FLOOD;Flooding
+MICROBURST WINDS;Gale
+UNSEASONABLY WARM;Heat wave
+STRONG WINDS;Gale
+WATERSPOUT/TORNADO;Tornado
+STORM SURGE;Storm surge
+WATERSPOUT-;Storm surge
+TROPICAL STORM ALBERTO;Tropical storm
+TROPICAL STORM GORDON;Tropical storm
+LIGHTNING THUNDERSTORM WINDS;Gale
+MINOR FLOODING;Flooding
+LIGHTNING INJURY;Storm
+FLASH FLOODS;Flooding
+WILDFIRE;Fire
+THUNDERSTORM WINDS 13;Storm
+SNOW;Snowstorm
+FROST;Hoar frost
+HIGH WINDS/;Gale
+FLOODS;Flooding
+HEAVY RAIN/SNOW;Heavy precipitation
+MUD SLIDE;Avalanche
+RURAL FLOOD;Flooding
+EXTREME HEAT;Heat wave
+COLD AND WET CONDITIONS;Cold wave
+SLEET/ICE STORM;Hail
+FREEZING RAIN;Heavy precipitation
+GROUND BLIZZARD;Blizzard
+MAJOR FLOOD;Flooding
+FREEZING RAIN/SLEET;Heavy precipitation
+COLD AIR TORNADO;Tornado
+FOG;Fog
+SMALL STREAM FLOOD;Flooding
+HAIL/WINDS;Hail
+WIND STORM;Gale
+LAKE FLOOD;Flooding
+WIND/HAIL;Gale
+SNOW AND ICE STORM;Blizzard
+WINTER WEATHER;Cold wave
+THUNDERSTORMS WIND;Storm gale
+URBAN AND SMALL STREAM FLOODIN;Flooding
+HEAVY RAIN/SEVERE WEATHER;Heavy precipitation
+WATERSPOUT/ TORNADO;Tornado
+HURRICANE-GENERATED SWELLS;Storm surge
+HIGH WINDS/COASTAL FLOOD;Flooding
+RIVER FLOODING;Flooding
+THUNDERSTORM WIND G50;Storm gale
+HEAVY LAKE SNOW;Snowstorm
+HEAVY SNOW/FREEZING RAIN;Snowstorm
+DUST DEVIL WATERSPOUT;Dust storm
+TORNDAO;Tornado
+MUD SLIDES URBAN FLOODING;Landslide/Mudslide
+GLAZE/ICE STORM;Blizzard
+HEAVY SNOW/WINTER STORM;Snowstorm
+AVALANCE;Avalanche
+DUST STORM/HIGH WINDS;Dust storm
+FOREST FIRES;Fire
+THUNDERSTORM WINDS.;Storm gale
+HAIL 150;Hail
+HAIL 100;Hail
+HAIL 125;Hail
+THUNDERSTORM WINDS G60;Storm gale
+HAIL 200;Hail
+HEAVY SNOW/HIGH WINDS & FLOOD;Snowstorm
+RIP CURRENTS/HEAVY SURF;Storm surge
+WILDFIRES;Fire
+SNOW/COLD;Snowstorm
+TSTM WIND G58;Storm gale
+HEAVY SNOW SQUALLS;Blizzard
+SNOW/ICE STORM;Blizzard
+HEAVY SNOW-SQUALLS;Blizzard
+HEAVY MIX;Storm
+SNOW/SLEET;Snowstorm
+SNOW SQUALLS;Snowstorm
+RECORD SNOW;Snowstorm
+RECORD HEAT;Heat wave
+THUNDERSTORM WIND/ TREES;Storm gale
+THUNDERSTORM WIND 98 MPH;Storm gale
+TORNADO F2;Tornado
+HURRICANE EMILY;Hurricane
+HURRICANE GORDON;Hurricane
+THUNDERSTORM WIND 60 MPH;Storm gale
+THUNDERSTORM WIND/ TREE;Storm gale
+THUNDERSTORM WIND 65 MPH;Storm gale
+THUNDERSTORM WIND.;Storm gale
+BLOWING SNOW;Snowstorm
+THUNDERSTORM HAIL;Hail
+LIGHTNING  WAUSEON;Storm
+ICE AND SNOW;Snowstorm
+HEAVY SNOW/ICE;Snowstorm
+HIGH WIND/HEAVY SNOW;Snowstorm
+HEAVY PRECIPITATION;Heavy precipitation
+TSTM WIND DAMAGE;Storm gale
+RAIN/WIND;Heavy precipitation
+HAIL 75;Hail
+HEAVY SNOW/BLIZZARD/AVALANCHE;Blizzard
+UNSEASONABLY WARM AND DRY;Heat wave
+RECORD/EXCESSIVE HEAT;Heat wave
+HIGH WAVES;Storm surge
+FLOOD/FLASH;Flooding
+HEAVY RAINS/FLOODING;Heavy precipitation
+THUNDERSTORM WINDS/FLOODING;Storm gale
+THUNDEERSTORM WINDS;Storm gale
+HIGH WINDS/COLD;Gale
+SNOW/ BITTER COLD;Snowstorm
+RAPIDLY RISING WATER;Flooding
+ICE/STRONG WINDS;Gale
+HIGH WINDS/SNOW;Gale
+HEAVY SNOW AND STRONG WINDS;Snowstorm
+SNOW/ ICE;Snowstorm
+TORNADOES;Tornado
+FREEZING DRIZZLE;Heavy precipitation
+FLASH FLOODING/FLOOD;Flooding
+HAIL 450;Hail
+THUNDERSTORMW;Storm
+TSTM WINDS;Storm gale
+TSTM WIND 65);Storm gale
+THUNDERSTORM WINDS/ FLOOD;Flooding
+HIGH WIND AND SEAS;Gale
+WILD/FOREST FIRES;Fire
+HAIL DAMAGE;Hail
+?;Others
+FLOOD/FLASHFLOOD;Flooding
+HIGH WIND 48;Gale
+URBAN/SMALL STREAM;Gale
+HEAVY SHOWER;Heavy precipitation
+URBAN SMALL;Heavy precipitation
+FLASH FLOOD/LANDSLIDE;Flooding
+FLASH FLOOD LANDSLIDES;Flooding
+Other;Others
+Tstm Wind;Storm gale
+ROUGH SURF;Storm surge
+Dust Devil;Dust storm
+Freeze;Cold wave
+COASTAL STORM;Storm
+River Flooding;Flooding
+Beach Erosion;Landslide/Mudslide
+Heavy Rain/High Surf;Heavy precipitation
+Early Frost;Cold wave
+Extreme Cold;Cold wave
+Torrential Rainfall;Heavy precipitation
+Hurricane Edouard;Hurricane
+TIDAL FLOODING;Flooding
+Strong Winds;Gale
+Glaze;Cold wave
+Whirlwind;Tropical cyclone
+Light snow;Snowstorm
+MIXED PRECIP;Heavy precipitation
+DOWNBURST;Storm
+Microburst;Storm
+Cold;Cold wave
+Snow Squalls;Blizzard
+Light Snowfall;Snowstorm
+Gusty wind/rain;Gale
+Wind;Gale
+Heat Wave;Heat wave
+COLD AND SNOW;Snowstorm
+TSTM WIND (G45);Storm gale
+GUSTY WIND;Gale
+TSTM WIND 45;Storm gale
+TSTM WIND (G40);Storm gale
+AGRICULTURAL FREEZE;Cold wave
+Hypothermia/Exposure;Cold wave
+Lake Effect Snow;Snowstorm
+Mixed Precipitation;Heavy precipitation
+COASTALSTORM;Storm
+DAM BREAK;Flooding
+blowing snow;Snowstorm
+TSTM WIND AND LIGHTNING;Storm gale
+Gradient wind;Gale
+WET MICROBURST;Storm
+TYPHOON;Typhoon
+SMALL HAIL;Hail
+COASTAL FLOODING/EROSION;Flooding
+TSTM WIND  (G45);Storm gale
+TSTM WIND (G35);Storm gale
+SEICHE;Flooding
+HYPERTHERMIA/EXPOSURE;Heat wave
+ROCK SLIDE;Landslide/Mudslide
+ TSTM WIND;Storm gale
+EXCESSIVE SNOW;Snowstorm
+FLOOD/FLASH/FLOOD;Flooding
+WIND AND WAVE;Gale
+ICE ROADS;Cold wave
+TSTM WIND G45;Storm gale
+WARM WEATHER;Heat wave
+ FLASH FLOOD;Flooding
+WINTER WEATHER MIX;Cold wave
+FALLING SNOW/ICE;Snowstorm
+NON TSTM WIND;Gale
+VOLCANIC ASH;Others
+HAZARDOUS SURF;Others
+ICE ON ROAD;Cold wave
+EXTREME COLD/WIND CHILL;Cold wave
+HURRICANE/TYPHOON;Hurricane
+FROST/FREEZE;Cold wave
+HEAVY SURF/HIGH SURF;Storm surge
+LAKE-EFFECT SNOW;Snowstorm
+TSUNAMI;Tsunami
+COLD/WIND CHILL;Cold wave
+MARINE THUNDERSTORM WIND;Storm surge
+ASTRONOMICAL LOW TIDE;Flooding
+MARINE HAIL;Hail
+TSTM WIND;Storm gale
+ICE STORM/FLASH FLOOD;Flooding
+HURRICANE OPAL/HIGH WINDS;Hurricane
+HURRICANE ERIN;Hurricane
+HEAVY RAIN;Heavy precipitation
+THUNDERSTORM WIND;Storm gale
+RIP CURRENT;Others
+FLASH FLOODING;Flooding
+TORNADO F0;Tornado
+THUNDERSTORM WINDS/HAIL;Storm gale
+HIGH WINDS;Gale
+HEAVY RAINS;Heavy precipitation
+THUNDERSTORM WINDS HAIL;Hail
+HEAVY RAIN/LIGHTNING;Heavy precipitation
+FLOODING;Flooding
+EXTREME COLD;Cold wave
+BREAKUP FLOODING;Flooding
+FREEZE;Cold wave
+HIGH WINDS HEAVY RAINS;Heavy precipitation
+MARINE MISHAP;Storm surge
+HIGH WIND/SEAS;Storm surge
+HIGH SEAS;Storm surge
+SEVERE TURBULENCE;Gale
+HEAVY SNOW;Snowstorm
+DUST STORM;Dust storm
+APACHE COUNTY;Others
+DUST DEVIL;Dust storm
+EXCESSIVE HEAT;Heat wave
+GUSTY WINDS;Gale
+HEAVY SURF COASTAL FLOODING;Flooding
+WILD FIRES;Fire
+WINTER STORM HIGH WINDS;Storm
+MUDSLIDES;Landslide/Mudslide
+SEVERE THUNDERSTORM;Storm
+SEVERE THUNDERSTORM WINDS;Storm gale
+FLOOD/FLASH FLOOD;Flooding
+THUNDERSTORMS;Storm
+WINDS;Gale
+HIGH WIND DAMAGE;Gale
+HEAVY SNOWPACK;Snowstorm
+HEAVY SURF;Storm surge
+DRY MICROBURST;Gale
+THUNDERSTORM WINDSS;Storm gale
+HEAT WAVE;Heat wave
+COASTAL FLOODING;Flooding
+BLIZZARD;Snowstorm
+WATERSPOUT TORNADO;Tornado
+URBAN/SMALL STREAM FLOOD;Flooding
+TORNADOES, TSTM WIND, HAIL;Tornado
+TROPICAL STORM;Tropical storm
+TROPICAL STORM JERRY;Tropical storm
+URBAN FLOODING;Flooding
+WATERSPOUT-TORNADO;Tornado
+LIGHTNING AND THUNDERSTORM WIN;Storm
+THUNDERSTORM WINDS53;Storm gale
+DAMAGING FREEZE;Cold wave
+HURRICANE;Hurricane
+LIGNTNING;Storm
+FREEZING RAIN/SNOW;Snowstorm
+THUNDERSNOW;Snowstorm
+COOL AND WET;Cold wave
+GLAZE ICE;Cold wave
+HIGH  WINDS;Gale
+MUD SLIDES;Landslide/Mudslide
+DROUGHT;Dry spell
+EXCESSIVE WETNESS;Wet spell
+GUSTNADO;Others
+SNOW AND HEAVY SNOW;Snowstorm
+EXTREME WIND CHILL;Gale
+SNOW/HEAVY SNOW;Snowstorm
+ICE JAM FLOODING;Flooding
+WIND DAMAGE;Gale
+TSTM WIND 55;Storm gale
+THUNDERTORM WINDS;Storm gale
+SNOW AND ICE;Snowstorm
+GRASS FIRES;Fire
+HAIL/WIND;Hail
+ICE;Cold wave
+THUNDERSTORM  WINDS;Storm gale
+DROUGHT/EXCESSIVE HEAT;Heat wave
+TUNDERSTORM WIND;Storm gale
+THUNDERSTORM WIND/LIGHTNING;Storm gale
+THUNDERSTORM;Storm
+LIGHTNING.;Storm
+RIVER AND STREAM FLOOD;Flooding
+RAIN;Heavy precipitation
+ICE FLOES;Cold wave
+LIGHTNING FIRE;Fire
+RECORD COLD;Cold wave
+COLD WAVE;Cold wave
+TORNADO F3;Tornado
+FLOOD/RIVER FLOOD;Flooding
+TORNADO F1;Tornado
+GLAZE;Cold wave
+MICROBURST;Storm
+BLIZZARD/WINTER STORM;Blizzard
+ICE JAM;Cold wave
+FROST\\FREEZE;Cold wave
+HVY RAIN;Heavy precipitation
+HAIL 075;Hail
+THUNDERSTORM WIND G55;Storm gale
+THUNDERSTORM WIND G60;Storm gale
+HARD FREEZE;Cold wave
+HEAVY SNOW AND HIGH WINDS;Snowstorm
+HEAVY RAIN AND FLOOD;Heavy precipitation
+URBAN AND SMALL;Others
+FOG AND COLD TEMPERATURES;Cold wave
+FLASH FLOOD FROM ICE JAMS;Flooding
+MUDSLIDE;Avalanche
+SNOW SQUALL;Snowstorm
+HEAVY SNOW/SQUALLS;Snowstorm
+ICY ROADS;Cold wave
+SNOW FREEZING RAIN;Snowstorm
+SNOW/FREEZING RAIN;Snowstorm
+SNOW/SLEET/FREEZING RAIN;Snowstorm
+HAIL 0.75;Hail
+THUNDERSTORM WIND 65MPH;Storm gale
+THUNDERSTORM WIND/AWNING;Storm gale
+THUNDERSTORM WIND TREES;Storm gale
+RIP CURRENTS;Storm surge
+COASTAL SURGE;Storm surge
+HURRICANE FELIX;Hurricane
+THUNDERSTORM WINDS 63 MPH;Storm gale
+THUNDERSTORM DAMAGE TO;Storm
+FLASH FLOOD - HEAVY RAIN;Flooding
+FLASH FLOOD/ STREET;Flooding
+HEAVY SNOW/BLIZZARD;Snowstorm
+THUNDERSTORM WINDSHAIL;Storm gale
+THUDERSTORM WINDS;Storm gale
+STORM FORCE WINDS;Storm gale
+LIGHTING;Storm
+THUNDERSTORM WINDS AND;Storm gale
+HIGH WIND/BLIZZARD;Gale
+FLOOD FLASH;Flooding
+SNOW/ICE;Snowstorm
+HEAT WAVE DROUGHT;Heat wave
+HEAT WAVES;Heat wave
+UNSEASONABLY COLD;Cold wave
+THUNDERSTORM WIND G52;Storm gale
+FLASH FLOOD/FLOOD;Flooding
+LOW TEMPERATURE;Cold wave
+THUNDERESTORM WINDS;Storm gale
+HYPOTHERMIA;Cold wave
+THUNERSTORM WINDS;Storm gale
+COLD/WINDS;Cold wave
+COLD WEATHER;Cold wave
+WILD/FOREST FIRE;Fire
+SNOW/HIGH WINDS;Snowstorm
+SNOWMELT FLOODING;Snowstorm
+SNOW ACCUMULATION;Snowstorm
+SNOW/BLOWING SNOW;Snowstorm
+THUNDERSTORM WIND/HAIL;Hail
+HAIL 175;Hail
+HAIL 275;Hail
+EXCESSIVE RAINFALL;Heavy precipitation
+HAILSTORM;Hail
+TSTMW;Storm gale
+TROPICAL STORM DEAN;Tropical storm
+LANDSLIDE;Landslide/Mudslide
+THUNDERSTORMWINDS;Storm gale
+HEAVY SEAS;Storm surge
+FLOOD & HEAVY RAIN;Flooding
+THUNDERSTROM WIND;Storm gale
+HIGH WATER;Others
+LANDSLIDES;Landslide/Mudslide
+BRUSH FIRE;Fire
+HEAVY SWELLS;Storm surge
+URBAN FLOODS;Flooding
+HEAVY RAIN/SMALL STREAM URBAN;Heavy precipitation
+TSTM WIND/HAIL;Storm gale
+Ice jam flood (minor;Cold wave
+URBAN/SML STREAM FLD;Flooding
+Heavy Surf;Storm surge
+Marine Accident;Others
+Strong Wind;Gale
+Erosion/Cstl Flood;Landslide/Mudslide
+Damaging Freeze;Cold wave
+High Surf;Storm surge
+Unseasonable Cold;Cold wave
+Wintry Mix;Cold wave
+Coastal Flooding;Flooding
+Landslump;Landslide/Mudslide
+Coastal Storm;Storm
+Tidal Flooding;Flooding
+EXTREME WINDCHILL;Gale
+Extended Cold;Cold wave
+Heavy snow shower;Snowstorm
+Light Snow;Snowstorm
+Freezing Spray;Cold wave
+Mudslides;Avalanche
+Mudslide;Avalanche
+Coastal Flood;Flooding
+Wind Damage;Gale
+Freezing Drizzle;Heavy precipitation
+GUSTY WIND/HVY RAIN;Gale
+Cold Temperature;Cold wave
+Snow;Snowstorm
+RAIN/SNOW;Snowstorm
+Gusty Winds;Gale
+TSTM WIND 40;Storm gale
+TSTM WIND (41);Storm gale
+Frost/Freeze;Cold wave
+OTHER;Others
+HYPOTHERMIA/EXPOSURE;Others
+Freezing Rain;Heavy precipitation
+BLACK ICE;Cold wave
+LIGHT SNOW;Snowstorm
+Gusty winds;Gale
+GRADIENT WIND;Gale
+gradient wind;Gale
+Freezing drizzle;Heavy precipitation
+Heavy surf and wind;Storm surge
+HIGH SWELLS;Storm surge
+UNSEASONAL RAIN;Heavy precipitation
+ TSTM WIND (G45);Storm gale
+HIGH WIND (G40);Gale
+COASTAL EROSION;Landslide/Mudslide
+COASTAL  FLOODING/EROSION;Flooding
+WINTRY MIX;Cold wave
+GUSTY WIND/HAIL;Gale
+LANDSPOUT;Others
+LAKE EFFECT SNOW;Snowstorm
+MIXED PRECIPITATION;Heavy precipitation
+LIGHT FREEZING RAIN;Heavy precipitation
+ROUGH SEAS;Storm surge
+NON-SEVERE WIND DAMAGE;Gale
+THUNDERSTORM WIND (G40);Storm gale
+LATE SEASON SNOW;Snowstorm
+ROGUE WAVE;Tsunami
+NON-TSTM WIND;Gale
+BLOWING DUST;Dust storm
+   HIGH SURF ADVISORY;Others
+WHIRLWIND;Tornado
+DROWNING;Others
+MARINE TSTM WIND;Storm gale
+WINTER WEATHER/MIX;Cold wave
+ASTRONOMICAL HIGH TIDE;Others
+TROPICAL DEPRESSION;Tropical storm
+MARINE HIGH WIND;Gale
+STORM SURGE/TIDE;Storm surge
+LAKESHORE FLOOD;Flooding
+MARINE STRONG WIND;Gale
+DENSE SMOKE;Fire
+FROST\FREEZE;Cold wave
+FREEZING FOG;Cold wave

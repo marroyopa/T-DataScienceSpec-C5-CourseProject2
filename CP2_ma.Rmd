@@ -1,0 +1,407 @@
+---
+title: "Health and economics consequences of storms and other severe weather events 1950-2011"
+author: "Marc Arroyo"
+date: "23/12/2020"
+output: html_document
+---
+
+## 0. Introduction
+
+This document is Marc Arroyo's proposed solution to the **Course Project 2** of the course **Reproducible Research** corresponding to the Data Science Specialization offered by Johns Hopkins University via Coursera.
+
+## 1. Synopsis
+
+This study is based on the information of the National Weather Service about extreme weather events and their impact on human health and economy.
+
+The conclusion is that while Tornadoes are by far the events causing more damage to human health, they fall to third position when considering only economic impact of the phenomenon. The same happens to Flooding, being the type of events causing more economic damage, but the third causing damage to human health. In general, the correlation between human health consequences and economic impact is not direct.
+
+Regarding economic impact, damages to property are nearly 10 times bigger than damages to crops.
+
+## 2. Data Processing
+
+### 2.1. Preparing Environment
+
+First thing we will do is to load required libraries and set the echo parameter to TRUE in order to not specify it in every chunk. Libraries to use are:  
+
+        - knitr in order to process the document and transform it to html
+        - dplyr in order to manage dataframes
+        - ggplot2 in order to create grahics
+        - lubridate in order to convert char and int to dates and times
+        - gridExtra in order to arrange ggplot2 graphs side by side
+        - grid in order to format graphs
+To set the echo parameter to TRUE we will use the opts_chunk$set instruction from knitr library. We will also indicate as a default option to not print messages or warnings in the final document and to stop in case of error in the code execution and not continue with the document.
+
+Finally we will use one code line to set the locale language to English, as mine it is not.
+
+```{r, EnvPrep, echo = TRUE, message = FALSE, warning = FALSE, error = FALSE, results='hide'}
+
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(gridExtra)
+library(grid)
+
+opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = FALSE)
+
+Sys.setlocale("LC_ALL", "English")
+
+```
+
+### 2.2. Loading and exploring the data
+
+As the data is contained in the repository in zip format, we will check the existence of the file, and download it in case negative. In order to read it, we don't need to unzip, as the *read.csv* function is able to read directly the zip file.
+
+Then we will explore the resulting dataframe *(origdata)* using str function.
+
+```{r, LoadingData}
+zipname <- "repdata_data_StormData.zip.bz2"
+
+if (!file.exists(zipname)){
+        url_zip <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
+        download.file(url_zip, zipname)
+}
+
+origdata <- read.csv(zipname)
+obs <- nrow(origdata)
+var <- ncol(origdata)
+str(origdata)
+
+```
+
+As we can observe we have a dataframe with **`r obs`** observations with **`r var`** different variables.
+
+### 2.3. Preprocessing data
+
+#### 2.3.1. Selection of pertinent variables
+
+In the following address of the [National Weather Service](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf) is possible to download the information about the original dataset.
+
+First thing we will do in order to reduce the amount of information to treat is to select only relevant variables. 
+
+As the two questions to address are related to event types that affect health or have economic consequences we will select following variables:
+
+        - **BGN_DATE** is the date the phenomenon started
+        - **EVTYPE** is the type of event in the observation
+        - **FATALITIES** are the number of fatalities reported in the observation
+        - **INJURIES** are the number of injuries reported in the observation
+        - **PROPDMG** are the damages to properties reported in the observation
+        - **PROPDMGEXP** are the exponentials to multiply the PROPDMG figures
+        - **CROPDMG** are the damages to crops reported in the observation
+        - **CROPDMGEXP** are the exponentials to multiply the CROPDMG figures
+
+As it is explained in the official information, if a phenomenon goes across more than one month, there's a register for every month, that means a different observation, we will consider only the beginning date, and as there aren't questions to answer about duration, we will get rid of the end date, start and end hours and Time Zone.
+That also means that a phenomenon going across more than one month will be counted as many times as months went across, but there's no way to merge the lines, then we will have to live with this vagueness.
+
+We don't have any question around States or Counties, and both questions have to be replied nationwide, thus we will get rid of any geographical notion since the whole file is US related.
+
+```{r, SelectingData}
+
+signcols <- c("BGN_DATE", "EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP") ## significant columns
+signdata <- origdata[, signcols] ## reduced dataset
+
+```
+
+Now we will get rid of all the lines with 0 in the 4 numeric variables, that means, *FATALITIES*, *INJURIES*, *PROPDMG* and *CROPDMG*. All observations with a 0 in this four fields will be events without economical or health consequences, then not interesting for our analysis.
+
+```{r, SelectingObservations}
+
+signdata2 <- filter(signdata, (FATALITIES != 0) | (INJURIES != 0) | (PROPDMG != 0) | (CROPDMG != 0))
+
+totsumorigdata <- sum(origdata$FATALITIES)+sum(origdata$INJURIES)+sum(origdata$PROPDMG)+sum(origdata$CROPDMG)
+
+sizeorigdata <- round(object.size(origdata)/(1024^2), digits = 2)
+
+totsumsigndata2 <- sum(signdata2$FATALITIES)+sum(signdata2$INJURIES)+sum(signdata2$PROPDMG)+sum(signdata2$CROPDMG)
+
+sizesigndata2 <- round(object.size(signdata2)/(1024^2), digits = 2)
+
+```
+
+Now we will sum all the numerics columns in the original data frame and compare it with the sum of all the columns of our new data frame. Of course, the number means nothing because we will not take the exponentials into account, but if the numbers are the same we will verify that we didn't loose any significant information for our purposes. The sum of all columns in the original data was **`r totsumorigdata`** and the sum of all columns in our reduced data file is **`r totsumsigndata2`** then we verify that we hadn't lost sifnificant data, but our initial dataframe was **`r sizeorigdata`Mb** and now has been reduced to **`r sizesigndata2`Mb**, and the speed of the rest of the treatment and our computer memory space will be thankful. 
+
+In order to free memory, we will remove all data frames from our workspace, except of course, signdata2 which contains the relevant data for the rest of the analysis.
+
+```{r, removedataframes}
+
+rm(origdata)
+rm(signdata)
+
+```
+
+#### 2.3.2. Treatment to variables
+
+First treatment will be to convert our beginning date from char to a date format. As we have lost the Time Zone and the beginning hour of the event, all our dates will be at 00:00:00 hour of the date and in UTC Time Zone, which is not the truth, but is not relevant for our purposes. To do so, a single function of lubridate package will be enough.
+
+```{r, chngdateformat}
+
+signdata2$BGN_DATE <- mdy_hms(signdata2$BGN_DATE)
+
+dateclass <- class(signdata2$BGN_DATE)
+```
+
+And now our date is not more a char, but an object type **`r dateclass`**.
+
+Finally, our second transformation is related with the units of damages to properties and to crops. In the fields PROPDMGEXP and CROPDMGEXP we have an indication of the exponent to apply in order to have all magnitudes expressed in dollars.
+
+Let's have a look to PROPDMGEXP, and the relative values of PROPDMG for every PROPDMGEXP value.
+
+```{r, PROPDMGEXP}
+
+signdata2 %>% group_by(PROPDMGEXP)%>%summarise(sum(PROPDMG))
+
+```
+
+And also for CROPDMGEXP.
+
+```{r, CROPDMGEXP}
+
+signdata2 %>% group_by(CROPDMGEXP)%>%summarise(sum(CROPDMG))
+
+```
+
+As we can see, and it is explained in page 12 of the documentation that can be found in [National Weather Service](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf), there are several letters, standing K for thousands, M for milions, B for bilions. As there's no more explanation on the documents and the relative value of exponent variables without an unknown symbol are really low regarding the total, we will do following assumptions:
+
+        - Lower and uppercase letters mean the same
+        - H and h stands for the standar abreviation of hundred
+        - Numers are the exponent of base 10
+        - "", "+", "?", and "-" stand for 0
+Following our assumptions we will create two new columns for the appropriate numbers for PROPDMGEXP and CROPDMGEXP using two functions of *dplyr* package, *mutate* combined with *case_when*.
+
+```{r, Expcoertion}
+
+signdata2 <- mutate(signdata2, 
+                    PROPEXP = case_when(PROPDMGEXP == "" ~ 0,## Nothing to 0
+                                        PROPDMGEXP == "-" ~ 0,## Minus to 0
+                                        PROPDMGEXP == "+" ~ 0,## Plus to 0
+                                        PROPDMGEXP == "B" ~ 9,## Billions to 9
+                                        PROPDMGEXP == "H" ~ 2,## Hundreds to 2
+                                        PROPDMGEXP == "h" ~ 2,## hundreds to 2
+                                        PROPDMGEXP == "K" ~ 3,## Thous.(K) to 3
+                                        PROPDMGEXP == "k" ~ 3,## Thous.(k) to 3
+                                        PROPDMGEXP == "M" ~ 6,## Millions to 6
+                                        PROPDMGEXP == "m" ~ 6,## millions to 6
+                                        TRUE ~ as.numeric(PROPDMGEXP)))
+
+signdata2 <- mutate(signdata2, 
+                    CROPEXP = case_when(CROPDMGEXP == "" ~ 0,## Nothing to 0
+                                        CROPDMGEXP == "?" ~ 0,## ? to 0
+                                        CROPDMGEXP == "+" ~ 0,## Plus to 0
+                                        CROPDMGEXP == "B" ~ 9,## Billions to 9
+                                        CROPDMGEXP == "K" ~ 3,## Thous.(K) to 3
+                                        CROPDMGEXP == "k" ~ 3,## Thous.(k) to 3
+                                        CROPDMGEXP == "M" ~ 6,## Millions to 6
+                                        CROPDMGEXP == "m" ~ 6,## millions to 6
+                                        TRUE ~ as.numeric(CROPDMGEXP)))
+
+uniquepropexp <- unique(signdata2$PROPEXP)
+```
+
+And now we can see that all our exponents are a number in PROPERTY DAMAGES:
+
+```{r, propexp}
+
+class(signdata2$PROPEXP)
+unique(signdata2$PROPEXP)
+
+```
+
+And also in CROP DAMAGES:
+
+```{r, cropexp}
+
+class(signdata2$CROPEXP)
+unique(signdata2$CROPEXP)
+
+```
+
+And our last transformation to original data is concerning the *EVTYPE* field. Let's have a look to the unique events categorized:
+
+```{r, eventype}
+
+unique(signdata2$EVTYPE)
+
+```
+
+We can observe that, for example we have thunderstorm classified like "THUNDERSTORM WIND", "TSTM WIND", "THUNDERSTORM WINS", "THUNDERSTORM WINDS LIGHTNING", "THUNDEERSTORM WINDS", "THUNDERSTORM WINDS/FLOODING, "THUNERSTORM WINDS", "Tstm Wind", "TSTM WIND 45", "TSTM WIND (G45)", "TSTM WIND 40", "TSTM WIND (41)", and other names that refer to the same type of event, but that are counted separetly.
+
+It's clear that we need to create a new field regrouping the different descriptions under one single category in order to know which type of events have the consequences described in original documentation. This categorization isn't provided by the National Weather Service, then we will create our own classification and store it in a factor type variable.
+
+Based on the information of the **World Meteorological Organization** and their report [Event Types of Hazards and Extreme Events](https://www.wmo.int/pages/prog/wcp/wcdmp/meeting/documents/Catalogue_Hazards_Extreme_Events_WMO_091117.pdf) we classified the 488 different events in our file. This classification will be loaded from a csv file contained in the repository.
+
+```{r, loadeventclass}
+
+eventclass <- read.csv("EVTYPEClass.csv", sep = ";")
+
+unique(eventclass$EVTYPE_Class)
+```
+
+As we can observe, our classification now has been reduced to `r length(unique(eventclass$EVTYPE_Class))` different types of events and it's manageable.
+
+Once our classification is loaded in our data frame *eventclass*, we will add a column to our data frame *signdata2* with this reduced classification.
+
+```{r, factorEVTYPE}
+
+signdata2 <- merge(x = signdata2, y = eventclass, by.x = c("EVTYPE"), by.y = c("EVTYPE_Orig"), all.x = TRUE)
+
+DiffEventClass <- length(unique(signdata2$EVTYPE_Class))
+
+```
+
+And as we can see, now our file is classified into only **`r DiffEventClass`** types of events and is now ready to go for the results sections of the document.
+
+## 3. Results
+
+### 3.1. Health consequences
+
+In order to have an answer to the most harmful events for the population health, we will consider fatalities and injuries separate, as we are not able to mix it.
+
+To do so, we will build a purpose table and arrange it in order to have a numerical evaluation.
+
+```{r, Healthconseq}
+
+healthconseq <- signdata2 %>% group_by(EVTYPE_Class) %>% summarise(FAT = sum(FATALITIES), INJ = sum(INJURIES)) %>% arrange(desc(FAT), desc(INJ))
+
+## To draw a nicer table, knitr function kable will help us
+
+kable(head(healthconseq, 5), caption = "Top 5 events by Fatalities with Injuries informed")
+
+```
+
+And ordering by Injuries, the top 5 events is:
+
+```{r, Healthconseq2}
+
+## First we will arrange the table by Injuries descending
+
+healthconseq <- healthconseq %>% arrange(desc(INJ), desc(FAT))
+
+## To draw a nicer table, knitr function kable will help us
+
+kable(head(healthconseq, 5), caption = "Top 5 events by Injuries with Fatalities informed")
+
+```
+
+And finally we will summarize this findings in a single graphic. To do so, we will build three different graphics using the same y-axis, and then combining them in only one graphic using the capabilities of gridExtra package.
+
+On the left we will have in bars Fatalities, in the middle the labels for the events and in the right we will show Injuries.
+
+```{r, Healthconseq3}
+
+## First we will rearrange the table by Fatalities ascending, because we consider it the worst possible consequence for human health, and we want the values on top of our graph.
+
+healthconseq <- healthconseq %>% arrange(FAT, INJ)
+
+## And now we will transform EVTYPE_Class in an ordered factor to draw the plots and avoid alphabetic reordering
+
+healthconseq$EVTYPE_Class <- factor(healthconseq$EVTYPE_Class, levels = healthconseq$EVTYPE_Class)
+
+## First we will build our left graph drawing the bars for Fatalities. Important is the ggplot option scale_x_reverse in order to build the columns from right to left, and then options to not draw labels or ticks in y axis.
+
+pleft <- ggplot(healthconseq, aes(x = FAT, y = EVTYPE_Class)) +
+                geom_col() +
+                ylab(NULL) +
+                ggtitle("NUMBER OF FATALITIES") +
+                scale_x_reverse() +
+                theme(axis.title=element_blank(),
+                  axis.text.y=element_blank(),
+                  axis.ticks.y=element_blank(),
+                  plot.title = element_text(size = 8),
+                  plot.margin = margin(t = 1, r = -1, b = 1, l = 0))
+
+## And then we will build our right graph for Injuries as we did for Fatalities, but without reversing the x-axis and printing and centering y-axis text, in order to use it for both graphs.
+
+pright <- ggplot(healthconseq, aes(x = INJ, y = EVTYPE_Class)) +
+                geom_col() +
+                ylab(healthconseq$EVTYPE_Class) +
+                ggtitle("NUMBER OF INJURIES") +
+                theme(axis.title = element_blank(),
+                  axis.text.y = element_text(hjust = 0.5),
+                  axis.ticks.y = element_blank(),
+                  plot.title = element_text(size = 8, hjust = 1),
+                  plot.margin = margin(t = 1, r = 0, b = 1, l = -1))
+
+## And finally we will merge the two plots with the function grid.arrange from the gridExtra package. We will order it by columns and we will adjust width in order to give more space to the right graph that incorporates y-axis lables for both. 
+
+grid.arrange(pleft, pright, ncol=2, widths = c(5,7), top = "HUMAN HEALTH CONSEQUENCES OF EXTREME WEATHER EVENTS 1950-2011", bottom = grid.text("Figure 1", gp = gpar(col = "grey", fontsize = 8)))
+
+```
+
+As we can see, Tornadoes are the most harmful events leading Fatalities and Injuries by far from the second. Second in our graph are Heat Waves, with more than the double of fatalities, than the third, Flooding, but some injuries less than the second in injuries only classification, Storm Gales, holding the fifth place in fatalities only classification. In third and fourth we have Floodings and Storms, compleating the Top 5. Interesting to signal Storm Surge, that even being in the 8th place, has recorded **`r healthconseq$FAT[healthconseq$EVTYPE_Class == "Storm surge"]`** fatalities and **`r healthconseq$INJ[healthconseq$EVTYPE_Class == "Storm surge"]`** injuries, being the event with less possibilities to survive if you are involved in (Others not considered by its mixed events nature).
+
+### 3.1. Economic consequences
+
+In order to have an answer to the most harmful events for the country economy, we will consider damage to properties and crops separately and as they are expressed in dollar, we will add them to have the total damage.
+
+To do so, we will build a purpose table and arrange it in order to have a numerical evaluation. Economic data is expressed as a value and an exponent for 10, to multiply the value and obtain total amount of dollars estimated. We will build our table subtracting 6 from the exponent in order to have total damages counted in million dollars.
+
+```{r, Economconseq}
+
+economconseq <- signdata2 %>% group_by(EVTYPE_Class) %>% summarise(PROP = sum(PROPDMG * 10^(PROPEXP-6)), CROP = sum(CROPDMG * 10^(CROPEXP-6)), TOT = PROP+CROP) %>% arrange(desc(TOT))
+
+## To draw a nicer table, knitr function kable will help us
+
+kable(head(economconseq, 5), caption = "Top 5 events by Fatalities with Injuries informed")
+
+```
+
+First thing that we can count is that the Total economic consequences estimated are up to **`r prettyNum(sum(economconseq$TOT), scientific = FALSE)`** million dollars, where **`r prettyNum(sum(economconseq$PROP), scientific = FALSE)`** of them are due to damages to property, and only **`r prettyNum(sum(economconseq$CROP), scientific = FALSE)`** are due to damages to crop.  
+
+And now, to have the total economic consequences of the events clear, but also their contribution to property and crop damages, we will build tree different plots and merge them with grid.arrange function.
+
+```{r, Economconseq2}
+
+## First we will arrange the table by Total damage ascending
+
+economconseq <- economconseq %>% arrange(TOT)
+
+## And now we will transform EVTYPE_Class in an ordered factor to draw the plots and avoid alphabetic reordering
+
+economconseq$EVTYPE_Class <- factor(economconseq$EVTYPE_Class, levels = economconseq$EVTYPE_Class)
+
+## First we will build our left graph drawing the bars for Total damage. Important is the ggplot option scale_x_reverse in order to build the columns from right to left, and then options to not draw labels or ticks in y axis.
+
+pleft <- ggplot(economconseq, aes(x = TOT, y = EVTYPE_Class)) +
+                geom_col(fill = "blue") +
+                ylab(NULL) +
+                ggtitle("TOTAL ECONOMIC DAMAGES M$") +
+                scale_x_reverse() +
+                theme(axis.title=element_blank(),
+                  axis.text.y=element_blank(),
+                  axis.ticks.y=element_blank(),
+                  plot.title = element_text(size = 8, hjust = 0.5),
+                  plot.margin = margin(t = 1, r = -1, b = 1, l = 0))
+
+## And then we will build our middle graph for Property damage as we did for total damages, but without reversing the x-axis and printing and centering y-axis text, in order to use it for the three graphs.
+
+pmid <- ggplot(economconseq, aes(x = PROP, y = EVTYPE_Class)) +
+                geom_col(fill = "red") +
+                ylab(economconseq$EVTYPE_Class) +
+                ggtitle("PROPERTY DAMAGES M$") +
+                theme(axis.title = element_blank(),
+                  axis.text.y = element_text(hjust = 0.5),
+                  axis.ticks.y = element_blank(),
+                  plot.title = element_text(size = 8, hjust = 0.5),
+                  plot.margin = margin(t = 1, r = 0, b = 1, l = -1))
+
+## And in third place, on the right we will build the graph for crop damages, equal to property damage graph, but without y labels.
+
+pright <- ggplot(economconseq, aes(x = CROP, y = EVTYPE_Class)) +
+                geom_col(fill = "green") +
+                ylab(NULL) +
+                ggtitle("CROP DAMAGES M$") +
+                theme(axis.title = element_blank(),
+                  axis.text.y = element_blank(),
+                  axis.ticks.y = element_blank(),
+                  plot.title = element_text(size = 8, hjust = 0.5),
+                  plot.margin = margin(t = 1, r = 0, b = 1, l = -1))
+
+## And finally we will merge the two plots with the function grid.arrange from the gridExtra package. We will order it by columns and we will adjust width in order to give more space to the right graph that incorporates y-axis lables for both. 
+
+grid.arrange(pleft, pmid, pright, ncol=3, widths = c(5,8,5), top = "ECONOMIC CONSEQUENCES OF EXTREME WEATHER EVENTS 1950-2011", bottom = grid.text("Figure 2", gp = gpar(col = "grey", fontsize = 8)))
+
+```
+
+As we can see, Flooding is by far the most economically harmful event, because of their enormous damages to property, but is also the second event with more damage to crops. Hurricanes, Tornadoes, Storm surges and Hails complete the top five, all due to their damages to property (Note that scale in crop damage graph is 10x smaller than in property damage graph).
+
+Even the difference in scale of property and crop damages graphs, we can observe some events like Dry Spells or Cold and Heat waves, that account more damages to crops than to properties.
